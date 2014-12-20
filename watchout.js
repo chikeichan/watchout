@@ -13,7 +13,7 @@ var player = {}
 player.cx = width/2;
 player.cy = height/2;
 player.r = 20;
-player.color = 'purple';
+player.color = 'black';
 player.type = 'player';
 player.blinking = false;
 player.move = function(){
@@ -129,7 +129,7 @@ var drag = d3.behavior.drag()
       player.blinking = true;
       var blinking = setInterval(function(){
         if(player.color === 'white'){
-          player.color = 'purple';
+          player.color = 'black';
         } else {
           player.color = 'white';
         }
@@ -138,7 +138,7 @@ var drag = d3.behavior.drag()
       setTimeout(function(){
         player.blinking = false;
         clearInterval(blinking);
-        player.color = 'purple';
+        player.color = 'black';
       }, 1000);
     }
   }

@@ -5,4 +5,6 @@ Feel free to use it if you like. */
 
 svg {
   border: 1px solid black;
+  background-image: url('http://www.roadfood.com/photos/21181.jpg');
+  background-position: center;
 }

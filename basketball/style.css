@@ -1,0 +1,11 @@
+svg {
+  border: 1px solid black;
+}
+
+h1{
+  display: inline-block;
+}
+
+select {
+  display: inline-block;
+}
