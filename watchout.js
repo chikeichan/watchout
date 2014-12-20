@@ -40,8 +40,8 @@ var generateEnemies = function(enemies, nEnemies){
     //generate random position
     var cx = 42 + Math.random() * 416;
     var cy = 42 + Math.random() * 416;
-    var dx = -6 + Math.random()*12;
-    var dy = -6 + Math.random()*12;
+    var dx = -18 + Math.random()*36;
+    var dy = -18 + Math.random()*36;
     //create enemy
     var enemy = {}
     enemy.cx = cx;
@@ -99,8 +99,12 @@ var collisions = 0;
 
 var dragmove = function(d) {
   //console.log(d3.mouse(this));
-  d.cx = d3.mouse(this)[0];
-  d.cy = d3.mouse(this)[1];
+  if (d3.mouse(this)[0]>20 && d3.mouse(this)[0]<=480){
+    d.cx = d3.mouse(this)[0];
+  }
+  if(d3.mouse(this)[1]>=20 && d3.mouse(this)[1]<=480){
+    d.cy = d3.mouse(this)[1];
+  }
 }
 var drag = d3.behavior.drag()
   //.origin(function(d) {return d; })
