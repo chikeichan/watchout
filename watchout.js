@@ -7,12 +7,15 @@ var svg = d3.select('body').append('svg')
   .attr('height', height)
 
 
+
 // Player Data ============================================
 var player = {}
 player.cx = width/2;
 player.cy = height/2;
 player.r = 20;
 player.color = 'purple';
+player.type = 'player';
+player.blinking = false;
 player.move = function(){
   //console.log('Yo')
 }
@@ -47,6 +50,7 @@ var generateEnemies = function(enemies, nEnemies){
     enemy.dy = dy;
     enemy.r = 40;
     enemy.color = 'red';
+    enemy.type = 'enemy';
     //move
     enemy.move = function(){
       this.cx = this.cx + this.dx;
@@ -86,20 +90,60 @@ var update = function(data){
 };
 // var force = d3.layout.force();
 
+
+
+//Game Logic ==========================================
+var highScore = 0;
+var currentScore = 0;
+var collisions = 0;
+
 var dragmove = function(d) {
-  console.log(d3.mouse(this));
+  //console.log(d3.mouse(this));
   d.cx = d3.mouse(this)[0];
   d.cy = d3.mouse(this)[1];
 }
 var drag = d3.behavior.drag()
-  .origin(function(d) {return d; })
+  //.origin(function(d) {return d; })
   .on('drag', dragmove);
 
-
+  var collision = function(){
+  //COllision logic
+  //loop thru each enemy
+    var player = enemies[enemies.length-1];
+    for (var i=0; i<enemies.length-1; i++){
+      //check if enemy is within colission distance from player
+      var delx = enemies[i].cx - player.cx;
+      var dely = enemies[i].cy - player.cy;
+      var c = Math.sqrt(delx*delx + dely*dely);
+      if (c<60 && !player.blinking){
+      //reset current score
+      currentScore = 0;
+      //add one to collision
+      collisions++;
+      $('.collisions>span').html(collisions);
+      //start flash mode
+      player.blinking = true;
+      var blinking = setInterval(function(){
+        if(player.color === 'white'){
+          player.color = 'purple';
+        } else {
+          player.color = 'white';
+        }
+      },130)
+      //end flash mode in 1000ms
+      setTimeout(function(){
+        player.blinking = false;
+        clearInterval(blinking);
+        player.color = 'purple';
+      }, 1000);
+    }
+  }
+}
 enemies.push(player);
   svg.selectAll('circle').data(enemies)
   .enter()
   .append('circle')
+  .attr('class',function(d){return d.type;})
   .attr('cx',function(d){return d.cx;})
   .attr('cy',function(d){return d.cy;})
   .attr('r',function(d){return d.r;})
@@ -114,9 +158,18 @@ enemies.push(player);
 //timer function, call once every 33ms
 setInterval(function(){
   moveEnemies(enemies);
+  currentScore++;
+  $('.current>span').html(currentScore);
+  if (currentScore>highScore){
+    highScore = currentScore
+    $('.high>span').html(highScore);
+  }
+
   //svg.selectAll('circle').remove();
   //enemies.push(player);
   update(enemies);
+  collision()
+
 },40)
 
 
