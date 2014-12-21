@@ -1,11 +1,40 @@
+body {
+  color:white;
+  background-color: rgb(55, 55, 55);
+}
+
 svg {
   border: 1px solid black;
+  background-color: rgb(94, 92, 92);
 }
 
 h1{
   display: inline-block;
+  color: white;
+  margin: 0;
 }
 
 select {
   display: inline-block;
 }
+
+circle {
+  opacity: 0.8;
+  color: 'red';
+}
+
+#y {
+  -webkit-transform: rotate(90);
+  transform: rotate(-90deg);
+  position: absolute;
+  margin-left: auto;
+  margin-top: 250px;
+  width: 50px;
+}
+
+#x {
+  position: absolute;
+  margin-left: 450px;
+  margin-top: 470px;
+}
+

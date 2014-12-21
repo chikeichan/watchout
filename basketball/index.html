@@ -3,16 +3,37 @@
   <head>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.5.1/d3.min.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
+    <script type="text/javascript" src="salaries.js"></script>
+    <script type="text/javascript" src="stats.js"></script>
 
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
-   <h1>Basketball</h1>
-    <select>
-      <option value='points'>points</option>
-      <option value='minutes'>minutes</option>
+   <h1>Basketball</h1><br>
+    Salary Per <select>
+      <option value='points'>Points</option>
+      <option value='minutes'>Minutes</option>
+      <option value='gamesPlayed'>Games Played</option>
+      <option value='rebounds'>Rebounds</option>
+      <option value='assists'>Assists</option>
+      <option value='steals'>Steal</option>
+      <option value='blocks'>Blocks</option>
     </select>
     <br>
+    <div id='x'>Salary</div>
+    <div id='y'>Points</div>
   </body>
 <script src='graph.js'></script>
 </html>
+
+<!--
+  player.salary = data.salary;
+  player.points = data.tpt;
+  player.minutes = data.tmin;
+  player.gamesPlayed = data.gp;
+  player.rebounds = data.treb;
+  player.assists = data.tasst;
+  player.steals = data.tstl;
+  player.blocks = data.tblk;
+  -->
